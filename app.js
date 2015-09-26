@@ -53,11 +53,11 @@ Latitude:30.7593452
 Longitude:-98.6750379
 */
 
-var reporter = 'nobody';//request.json['reporter'];
-var bird_species = 'wren'; //request.json['bird_species'];
-var datetime = '8/1/2015'; //request.json['datetime'];
+var reporter = 'me';//request.json['reporter'];
+var bird_species = 'mockingbird'; //request.json['bird_species'];
+var datetime = '9/22/2015'; //request.json['datetime'];
 var lat = '30.7593452'; //request.json['lat'];
-var lon = '-98.6750379'; //request.json['long'];
+var lon = '-97.9523768'; //request.json['long'];
 var image = ''; //request.json['image'];
 var sound = ''; //request.json['sound'];
 var notes = ''; //request.json['notes'];
@@ -74,12 +74,12 @@ var insertDocument = function(db, callback) {
         'coord': [ lat, lon ]
       }), function(err, result) {
     assert.equal(err, null);
-    if(doc !=null){
-      //console.log("Inserted a document into the birds collection.");
+    if(doc!=null){
+      console.log("Inserted a document into the birds collection.");
       callback(result);      
     }
-    else{
-      console.log("Oops.");
+    else {
+      console.log("Nothing to insert.");
     }
   };
 };
@@ -88,7 +88,6 @@ var insertDocument = function(db, callback) {
 MongoClient.connect(url, function(err, db) {
   assert.equal(null, err);
   insertDocument(db, function() {
-      console.log("Inserted a document into the birds collection.");
       db.close();
   });
 }); 
@@ -100,7 +99,7 @@ var getBirds = function(db, callback) {
    cursor.each(function(err, doc) {
       assert.equal(err, null);
       if (doc != null) {
-         console.dir(doc);
+         console.log(doc);
       } else {
         console.log('There are no birds.');
         callback();
@@ -118,23 +117,47 @@ MongoClient.connect(url, function(err, db) {
 // Delete all birds from the birds collection
 
 var killBirds = function(db, callback) {
-   db.collection('birds').deleteMany( {}, function(err, results) {
+   db.collection('birds').deleteMany( {}, 
+    function(err, results) {
       console.log(results);
       callback();
    });
 };
 
+
+//Delete just grackles from the birds collection
+
+var killGrackles = function(db, callback) {
+   db.collection('birds').deleteOne( 
+    {'bird_species':'grackle'}, 
+    function(err, results) {
+      console.log(results);
+      callback();
+   });
+};
+
+// Commenting this out so I don't automatically kill all my birds again.
+/*
 MongoClient.connect(url, function(err, db) {
   assert.equal(null, err);
 
   killBirds(db, function() {
       db.close();
   });
-});
+}); */
+
+/*
+MongoClient.connect(url, function(err, db) {
+  assert.equal(null, err);
+
+  killGrackles(db, function() {
+      db.close();
+  });
+}); */
 
 // respond with "Hello World!" on the homepage
 app.get('/', function (req, res) {
-  res.send('Hello World!');
+  res.send('Hello Birds!');
 });
 
 // accept POST request on the homepage
