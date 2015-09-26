@@ -1,0 +1,40 @@
+{
+  "birds": [
+    {
+      "_id": "fa592531880a1b92652bd06e9a8b52c6",
+      "_rev": "1-e7b527c2f7235f1012e5c7bad2443f98",
+      "bird_species": "cardinal",
+      "datetime": "2015-09-12T21:56:00TZD",
+      "image": "",
+      "lat": "30.2500",
+      "long": "-97.7500",
+      "reporter": "jeff.pape@gmail.com",
+      "sound": "",
+      "notes" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos consequatur vel aliquam, nulla ducimus repellat sequi at ad magni laborum quae iste a ipsam ratione accusantium explicabo harum beatae natus."
+    },
+    {
+      "_id": "2fa592531880a1b92652bd06e9a8b52c7",
+      "_rev": "21-e7b527c2f7235f1012e5c7bad2443f99",
+      "bird_species": "blue jay",
+      "datetime": "2015-09-12T21:56:00TZD",
+      "image": "",
+      "lat": "30.4000",
+      "long": "-97.7500",
+      "reporter": "jeff.pape@gmail.com",
+      "sound": "",
+      "notes" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos consequatur vel aliquam, nulla ducimus repellat sequi at ad magni laborum quae iste a ipsam ratione accusantium explicabo harum beatae natus."
+    },
+    {
+      "_id": "3fa592531880a1b92652bd06e9a8b52c8",
+      "_rev": "31-e7b527c2f7235f1012e5c7bad2443f100",
+      "bird_species": "mockingbird",
+      "datetime": "2015-09-12T21:56:00TZD",
+      "image": "",
+      "lat": "30.1500",
+      "long": "-97.9500",
+      "reporter": "jeff.pape@gmail.com",
+      "sound": "",
+      "notes" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos consequatur vel aliquam, nulla ducimus repellat sequi at ad magni laborum quae iste a ipsam ratione accusantium explicabo harum beatae natus."
+    }
+  ]
+}
