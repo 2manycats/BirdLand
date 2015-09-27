@@ -4,7 +4,7 @@ var app = express();
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 var ObjectId = require('mongodb').ObjectID;
-var url = 'mongodb://localhost:27017/test';
+var url = 'mongodb://localhost:27017/birds';
 
 
 var server = app.listen(3000, function () {
@@ -74,7 +74,7 @@ var insertDocument = function(db, callback) {
         'coord': [ lat, lon ]
       }), function(err, result) {
     assert.equal(err, null);
-    if(doc!=null){
+    if(result!=null){
       console.log("Inserted a document into the birds collection.");
       callback(result);      
     }
@@ -95,15 +95,19 @@ MongoClient.connect(url, function(err, db) {
 // Retrieve all birds from the birds collection 
 
 var getBirds = function(db, callback) {
+   var birds =[];
    var cursor =db.collection('birds').find( );
    cursor.each(function(err, doc) {
       assert.equal(err, null);
       if (doc != null) {
          console.log(doc);
+         birds.push(doc);
       } else {
         console.log('There are no birds.');
-        callback();
+        callback();      
       }
+    //console.log(birds);
+    return birds; 
    });
 };
 
@@ -157,20 +161,23 @@ MongoClient.connect(url, function(err, db) {
 
 // respond with "Hello World!" on the homepage
 app.get('/', function (req, res) {
-  res.send('Hello Birds!');
+  //res.send('Hello Birds!');
+  res.json(getBirds(birds));
 });
 
 // accept POST request on the homepage
 app.post('/', function (req, res) {
-  res.send('Got a POST request');
+  //res.send('Got a POST request');
 });
 
 // accept PUT request at /user
-app.put('/user', function (req, res) {
+app.put('/', function (req, res) {
   res.send('Got a PUT request at /user');
 });
 
 // accept DELETE request at /user
-app.delete('/user', function (req, res) {
+app.delete('/', function (req, res) {
   res.send('Got a DELETE request at /user');
+  killBirds();
 });
+
