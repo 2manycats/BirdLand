@@ -4,8 +4,8 @@
 
   angular
     .module('birdland')
-    .constant('malarkey', malarkey)
-    .constant('toastr', toastr)
-    .constant('moment', moment);
+    // .constant('malarkey', malarkey)
+    // .constant('toastr', toastr)
+    // .constant('moment', moment);
 
 })();

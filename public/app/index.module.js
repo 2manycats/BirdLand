@@ -2,6 +2,6 @@
   'use strict';
 
   angular
-    .module('birdland', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui.router', 'uiGmapgoogle-maps']);
+    .module('birdland', ['ui.router', 'uiGmapgoogle-maps']);
 
 })();

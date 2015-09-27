@@ -3,12 +3,12 @@
 
   angular
     .module('birdland')
-    .run(runBlock);
+    // .run(runBlock);
 
   /** @ngInject */
-  function runBlock($log) {
+  // function runBlock($log) {
 
-    $log.debug('runBlock end');
-  }
+  //   $log.debug('runBlock end');
+  // }
 
 })();

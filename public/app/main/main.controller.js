@@ -6,7 +6,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($scope, birdData, $log, uiGmapGoogleMapApi) {
+  function MainController($scope, birdData, uiGmapGoogleMapApi) {
     var vm = this;
 
     // variables
@@ -92,7 +92,7 @@
     //functions
     function activate() {
       return getBirds().then(function() {
-        $log.info('Activated Birds!');
+        // $log.info('Activated Birds!');
         
       });
     }
