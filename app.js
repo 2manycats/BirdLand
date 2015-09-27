@@ -174,3 +174,9 @@ app.put('/user', function (req, res) {
 app.delete('/user', function (req, res) {
   res.send('Got a DELETE request at /user');
 });
+
+
+app.use( express.static( __dirname + '/birdland-frontend/src/'))
+app.get('/static', function(req, res) {
+  res.sendFile( __dirname + '/birdland-frontend/dist/index.html');
+});
