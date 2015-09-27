@@ -1,0 +1,120 @@
+<header class="header">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <h1 class="header__title">Birdland Birdwatching App</h1>
+        <!-- <nav class="header__nav nav">
+          <ul class="nav__list">
+            <li class="nav__item"><a class="nav__link" href="#" title="Login">Login</a></li>
+            <li class="nav__item"><a class="nav__link" href="#" title="Report">Report</a></li>
+          </ul>
+        </nav> -->
+      </div>
+    </div>
+  </div>
+
+
+</header>
+
+
+      <!-- header/navigation -->
+
+      
+
+  <!-- map -->
+  <section class="mapbox">
+  
+    <!-- map controls --> 
+
+    <ui-gmap-google-map center='main.map.center' zoom='main.map.zoom' class='mapbox__map'>
+      <!-- <ui-gmap-markers
+                  models='birds'
+                  idKey='birds.id' 
+                  
+
+                  coords='birds.coords'
+                  
+                  >
+      </ui-gmap-markers> -->
+
+      <ui-gmap-marker 
+        ng-repeat="bird in main.birds"
+        coords="bird.coords" 
+        idkey="bird.id"
+        click="main.showDetails">
+
+        <!-- <ui-gmap-window
+                
+                show='true'
+                templateUrl='main.detailsTemplate'
+                templateParameter='bird'> 
+        </ui-gmap-window> -->
+        <ui-gmap-window
+          class="report-details"
+          show="false"
+          templateUrl='main.detailsTemplate'
+          templateParameter='bird'
+          closeClick="main.hideDetails"> 
+        </ui-gmap-window>
+
+      </ui-gmap-marker>
+
+    </ui-gmap-google-map>
+    
+    <!-- <div id="map" class="mapbox__map">
+    </div> -->
+  
+    <div class="mapbox__controls">
+      <button class="report__save-btn">
+        Save report
+      </button>
+    </div>
+  
+  </section>
+
+      <!-- placeholder images -->
+      <!-- http://p-hold.com/bird/100/200 -->
+
+      <!-- report -->
+      <!-- <form action="" class="report">
+
+        <div class="form-group">
+          <label for="timestamp">Date</label>
+          <input type="text" class="report__input--timestamp form-control">
+        </div>
+        <div class="form-group">
+          <label for="location">Location</label>
+          <input type="text" class="report__input--location form-control">
+        </div>
+        <div class="form-group">
+          <label for="species">Species</label>
+          <input type="text" class="report__input--species form-control">
+        </div>
+        <div class="form-group">
+          <label for="notes">Notes</label>
+          <textarea rows="10" class="report__input--notes form-control">
+          </textarea>
+        </div>
+      </form> -->
+      
+      <!-- login/signup -->
+      <pre class="debug" ng-click="main.showDetails()">
+        <p>{{main.test}}</p>
+        <p>{{main.position}}</p>
+        <p ng-repeat="bird in main.birds">{{bird.bird_species}}</p>
+        <!-- <p ng-model="main.birds">{{main.birds}}</p> -->
+        <!-- <p ng-repeat="bird in main.birds">
+          {{bird.bird_species}}
+        </p> -->
+      </pre>
+      
+
+<script type="text/javascript">
+  // console.log('map function: ', main.initMap);
+</script>
+
+<!--
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmP9_IcqdVZEvLo8cu4tQ42JUCo6V6-5Y&callback=main.initMap">
+</script>
+-->
