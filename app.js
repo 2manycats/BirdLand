@@ -176,7 +176,7 @@ app.delete('/user', function (req, res) {
 });
 
 
-app.use( express.static( __dirname + '/birdland-frontend/src/'))
+app.use( express.static( __dirname + '/public/'))
 app.get('/static', function(req, res) {
-  res.sendFile( __dirname + '/birdland-frontend/dist/index.html');
+  res.sendFile( __dirname + '/public/index.html');
 });
