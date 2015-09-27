@@ -181,3 +181,11 @@ app.delete('/', function (req, res) {
   killBirds();
 });
 
+<<<<<<< HEAD
+=======
+
+app.use( express.static( __dirname + '/public/'))
+app.get('/static', function(req, res) {
+  res.sendFile( __dirname + '/public/index.html');
+});
+>>>>>>> restructure-frontend
