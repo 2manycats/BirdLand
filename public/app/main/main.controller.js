@@ -63,17 +63,6 @@
     //do stuff
     activate();
 
-    
-
-    function hello() {
-      return birdData.getHello()
-        .then(function(data) {
-          console.log('hello again: ', data);
-          return data;
-        });
-    }
-    
-    hello();
     // birdData.saveReport(vm.testReport);
     saveReport(vm.testReport);
 
