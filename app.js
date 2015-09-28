@@ -1,11 +1,12 @@
 var express = require('express');
 var app = express();
-
+var bodyParser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 var ObjectId = require('mongodb').ObjectID;
 var url = 'mongodb://localhost:27017/birds';
 
+app.use(bodyParser());
 
 var server = app.listen(3000, function () {
   var host = server.address().address;
@@ -167,25 +168,30 @@ app.get('/', function (req, res) {
 // accept POST request on the homepage
 app.post('/', function (req, res) {
   //res.send('Got a POST request');
-  MongoClient.connect(url, function(db) {
-  var reporter = request.json['reporter'];
-  var bird_species = request.json['bird_species'];
-  var datetime = request.json['datetime'];
-  var lat = request.json['lat'];
-  var lon = request.json['long'];
-  var image = request.json['image'];
-  var sound = request.json['sound'];
-  var notes = request.json['notes'];
+  console.log(req.body);
+  res.send('Test Response')
 
-   db.collection('birds').insert( {
-      'reporter' : reporter,
-      'bird_species': bird_species,
-      'datetime': datetime,
-      'image': image,
-      'sound': sound,
-      'notes': notes,
-      'coord': [ lat, lon ]
-    });
+  MongoClient.connect(url, function(db) {
+  // var reporter = request.json['reporter'];
+  // var bird_species = request.json['bird_species'];
+  // var datetime = request.json['datetime'];
+  // var lat = request.json['lat'];
+  // var lon = request.json['long'];
+  // var image = request.json['image'];
+  // var sound = request.json['sound'];
+  // var notes = request.json['notes'];
+
+
+
+   // db.collection('birds').insert( {
+   //    'reporter' : reporter,
+   //    'bird_species': bird_species,
+   //    'datetime': datetime,
+   //    'image': image,
+   //    'sound': sound,
+   //    'notes': notes,
+   //    'coord': [ lat, lon ]
+   //  });
   });
 });
 
