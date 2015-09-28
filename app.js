@@ -110,13 +110,13 @@ var getBirds = function(db, callback) {
     return birds; 
    });
 };
-
+/*
 MongoClient.connect(url, function(err, db) {
-  assert.equal(null, err);
+  //assert.equal(null, err);
   getBirds(db, function() {
       db.close();
   });
-}); 
+}); */
 
 // Delete all birds from the birds collection
 
@@ -127,7 +127,6 @@ var killBirds = function(db, callback) {
       callback();
    });
 };
-
 
 //Delete just grackles from the birds collection
 
@@ -162,7 +161,8 @@ MongoClient.connect(url, function(err, db) {
 // respond with "Hello World!" on the homepage
 app.get('/', function (req, res) {
   //res.send('Hello Birds!');
-  res.json(getBirds(birds));
+  var birds = getBirds();
+  res.json(birds);
 });
 
 // accept POST request on the homepage
@@ -172,26 +172,25 @@ app.post('/', function (req, res) {
   res.send('Test Response')
 
   MongoClient.connect(url, function(db) {
-  // var reporter = request.json['reporter'];
-  // var bird_species = request.json['bird_species'];
-  // var datetime = request.json['datetime'];
-  // var lat = request.json['lat'];
-  // var lon = request.json['long'];
-  // var image = request.json['image'];
-  // var sound = request.json['sound'];
-  // var notes = request.json['notes'];
+  var reporter = req.body.msg['reporter'];
+  var bird_species = req.body.msg['bird_species'];
+  var datetime = req.body.msg['datetime'];
+  var lat = req.body.msg['lat'];
+  var lon = req.body.msg['lng'];
+  var image = req.body.msg['image'];
+  var sound = req.body.msg['sound'];
+  var notes = req.body.msg['notes'];
 
 
-
-   // db.collection('birds').insert( {
-   //    'reporter' : reporter,
-   //    'bird_species': bird_species,
-   //    'datetime': datetime,
-   //    'image': image,
-   //    'sound': sound,
-   //    'notes': notes,
-   //    'coord': [ lat, lon ]
-   //  });
+   db.collection('birds').insert( {
+      'reporter' : reporter,
+      'bird_species': bird_species,
+      'datetime': datetime,
+      'image': image,
+      'sound': sound,
+      'notes': notes,
+      'coord': [ lat, lon ]
+    });
   });
 });
 
