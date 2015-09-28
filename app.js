@@ -52,7 +52,7 @@ Burnett:
 Latitude:30.7593452
 Longitude:-98.6750379
 */
-
+/*
 var reporter = 'me';//request.json['reporter'];
 var bird_species = 'mockingbird'; //request.json['bird_species'];
 var datetime = '9/22/2015'; //request.json['datetime'];
@@ -85,12 +85,11 @@ var insertDocument = function(db, callback) {
 };
 
 
-MongoClient.connect(url, function(err, db) {
-  assert.equal(null, err);
+MongoClient.connect(url, function(db) {
   insertDocument(db, function() {
       db.close();
   });
-}); 
+}); */
 
 // Retrieve all birds from the birds collection 
 
@@ -168,6 +167,26 @@ app.get('/', function (req, res) {
 // accept POST request on the homepage
 app.post('/', function (req, res) {
   //res.send('Got a POST request');
+  MongoClient.connect(url, function(db) {
+  var reporter = request.json['reporter'];
+  var bird_species = request.json['bird_species'];
+  var datetime = request.json['datetime'];
+  var lat = request.json['lat'];
+  var lon = request.json['long'];
+  var image = request.json['image'];
+  var sound = request.json['sound'];
+  var notes = request.json['notes'];
+
+   db.collection('birds').insert( {
+      'reporter' : reporter,
+      'bird_species': bird_species,
+      'datetime': datetime,
+      'image': image,
+      'sound': sound,
+      'notes': notes,
+      'coord': [ lat, lon ]
+    });
+  });
 });
 
 // accept PUT request at /user
@@ -181,11 +200,11 @@ app.delete('/', function (req, res) {
   killBirds();
 });
 
-<<<<<<< HEAD
-=======
+//<<<<<<< HEAD
+//=======
 
 app.use( express.static( __dirname + '/public/'))
 app.get('/static', function(req, res) {
   res.sendFile( __dirname + '/public/index.html');
 });
->>>>>>> restructure-frontend
+//>>>>>>> restructure-frontend
