@@ -161,25 +161,30 @@ MongoClient.connect(url, function(err, db) {
 // respond with "Hello World!" on the homepage
 app.get('/', function (req, res) {
   //res.send('Hello Birds!');
-  var birds = getBirds();
-  res.json(birds);
+  MongoClient.connect(url, function(err, db) {
+  //assert.equal(null, err);
+    birds = getBirds(db, function() {
+    res.json(birds); 
+    db.close();
+    });
+  });
 });
 
 // accept POST request on the homepage
 app.post('/', function (req, res) {
   //res.send('Got a POST request');
-  console.log(req.body);
+  console.log(req.body.msg.coords);
   res.send('Test Response')
 
-  MongoClient.connect(url, function(db) {
-  var reporter = req.body.msg['reporter'];
-  var bird_species = req.body.msg['bird_species'];
-  var datetime = req.body.msg['datetime'];
-  var lat = req.body.msg['lat'];
-  var lon = req.body.msg['lng'];
-  var image = req.body.msg['image'];
-  var sound = req.body.msg['sound'];
-  var notes = req.body.msg['notes'];
+  MongoClient.connect(url, function(err, db) {
+  var reporter = req.body.msg.reporter;
+  var bird_species = req.body.msg.bird_species;
+  var datetime = req.body.msg.datetime;
+  var lat = req.body.msg.lat;
+  var lon = req.body.msg.lng;
+  var image = req.body.msg.image;
+  var sound = req.body.msg.sound;
+  var notes = req.body.msg.notes;
 
 
    db.collection('birds').insert( {
@@ -191,17 +196,18 @@ app.post('/', function (req, res) {
       'notes': notes,
       'coord': [ lat, lon ]
     });
+   db.close;
   });
 });
 
 // accept PUT request at /user
 app.put('/', function (req, res) {
-  res.send('Got a PUT request at /user');
+  res.send('Got a PUT request');
 });
 
 // accept DELETE request at /user
 app.delete('/', function (req, res) {
-  res.send('Got a DELETE request at /user');
+  res.send('Got a DELETE request');
   killBirds();
 });
 
