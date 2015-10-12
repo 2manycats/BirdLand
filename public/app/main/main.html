@@ -25,6 +25,8 @@
   <section class="mapbox">
   
     <!-- map controls --> 
+    <ui-gmap-google-map center='{ latitude: 45, longitude: -73 }' zoom='8' class='mapTest'>
+    </ui-gmap-google-map>    
 
     <ui-gmap-google-map center='main.map.center' zoom='main.map.zoom' class='mapbox__map'>
       <!-- <ui-gmap-markers
@@ -65,7 +67,7 @@
     </div> -->
   
     <div class="mapbox__controls">
-      <button class="report__save-btn">
+      <button class="report__save-btn" ng-click="main.saveReport(main.testReport)">
         Save report
       </button>
     </div>

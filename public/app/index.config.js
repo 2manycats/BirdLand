@@ -16,5 +16,11 @@
     // toastr.options.preventDuplicates = true;
     // toastr.options.progressBar = true;
   // }
-
+  .config(function(uiGmapGoogleMapApiProvider) {
+      uiGmapGoogleMapApiProvider.configure({
+          key: 'AIzaSyCmP9_IcqdVZEvLo8cu4tQ42JUCo6V6-5Y',
+          v: '3.20', //defaults to latest 3.X anyhow
+          libraries: 'weather,geometry,visualization'
+      });
+  })
 })();

@@ -22,16 +22,19 @@
       styles: styleArray,
       templateUrl: vm.detailsTemplate
     }
+    vm.saveReport = saveReport;
 
     vm.testReport = {
       "reporter": "Lisa Meng",
-      "bird_species": "swallow",
+      "bird_species": "screech owl",
       "datetime": "2015-09-12T21:56:00TZD",
       "image": "",
       "sound": "",
-      "notes" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos consequatur vel aliquam, nulla ducimus repellat sequi at ad magni laborum quae iste a ipsam ratione accusantium explicabo harum beatae natus.",
+      "notes" : "TEST REPORT! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos consequatur vel aliquam, nulla ducimus repellat sequi at ad magni laborum quae iste a ipsam ratione accusantium explicabo harum beatae natus.",
       "coord": [ 30.2500, -97.7500],
     }
+
+    vm.mapTest = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
 
     var styleArray = [ 
       //any style array defined in the google documentation you linked
@@ -63,7 +66,7 @@
     activate();
 
     // birdData.saveReport(vm.testReport);
-    saveReport(vm.testReport);
+    // saveReport(vm.testReport);
 
 
 
@@ -123,6 +126,7 @@
             lng: position.coords.longitude
           };
           $scope.$apply(function(){
+                  console.log('setting position');
                   vm.position = position;
                   vm.map = { center: { latitude: vm.position.lat, longitude: vm.position.lng }, zoom: 8 };
                 });
@@ -134,6 +138,10 @@
         handleLocationError(false)
       }
     }
+
+    uiGmapGoogleMapApi.then(function(maps) {
+      console.log('maps: ', maps);
+    });
 
     function mapBirds(birds) {
       console.log('mapping birds: ', birds);
