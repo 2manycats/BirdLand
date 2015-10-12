@@ -34,6 +34,8 @@
       "coord": [ 30.2500, -97.7500],
     }
 
+    vm.mapTest = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
+
     var styleArray = [ 
       //any style array defined in the google documentation you linked
       {
@@ -64,7 +66,7 @@
     activate();
 
     // birdData.saveReport(vm.testReport);
-    saveReport(vm.testReport);
+    // saveReport(vm.testReport);
 
 
 
@@ -124,6 +126,7 @@
             lng: position.coords.longitude
           };
           $scope.$apply(function(){
+                  console.log('setting position');
                   vm.position = position;
                   vm.map = { center: { latitude: vm.position.lat, longitude: vm.position.lng }, zoom: 8 };
                 });
@@ -135,6 +138,10 @@
         handleLocationError(false)
       }
     }
+
+    uiGmapGoogleMapApi.then(function(maps) {
+      console.log('maps: ', maps);
+    });
 
     function mapBirds(birds) {
       console.log('mapping birds: ', birds);
