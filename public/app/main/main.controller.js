@@ -22,14 +22,15 @@
       styles: styleArray,
       templateUrl: vm.detailsTemplate
     }
+    vm.saveReport = saveReport;
 
     vm.testReport = {
       "reporter": "Lisa Meng",
-      "bird_species": "swallow",
+      "bird_species": "screech owl",
       "datetime": "2015-09-12T21:56:00TZD",
       "image": "",
       "sound": "",
-      "notes" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos consequatur vel aliquam, nulla ducimus repellat sequi at ad magni laborum quae iste a ipsam ratione accusantium explicabo harum beatae natus.",
+      "notes" : "TEST REPORT! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos consequatur vel aliquam, nulla ducimus repellat sequi at ad magni laborum quae iste a ipsam ratione accusantium explicabo harum beatae natus.",
       "coord": [ 30.2500, -97.7500],
     }
 
