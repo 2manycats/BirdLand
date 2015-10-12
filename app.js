@@ -6,7 +6,7 @@ var assert = require('assert');
 var ObjectId = require('mongodb').ObjectID;
 var url = 'mongodb://localhost:27017/birds';
 
-app.use(bodyParser());
+app.use(bodyParser.json());
 
 var server = app.listen(3000, function () {
   var host = server.address().address;
@@ -103,7 +103,7 @@ var getBirds = function(db, callback) {
          console.log(doc);
          birds.push(doc);
       } else {
-        console.log('There are no birds.');
+        //console.log('There are no birds.');
         callback();      
       }
     //console.log(birds);
@@ -140,11 +140,12 @@ var killGrackles = function(db, callback) {
 };
 
 // Commenting this out so I don't automatically kill all my birds again.
-/*
-MongoClient.connect(url, function(err, db) {
+
+/*MongoClient.connect(url, function(err, db) {
   assert.equal(null, err);
 
   killBirds(db, function() {
+      console.log("Birds deleted.");
       db.close();
   });
 }); */
@@ -159,12 +160,12 @@ MongoClient.connect(url, function(err, db) {
 }); */
 
 // respond with "Hello World!" on the homepage
-app.get('/', function (req, res) {
+app.get('/static', function (req, res) {
   //res.send('Hello Birds!');
   MongoClient.connect(url, function(err, db) {
   //assert.equal(null, err);
     birds = getBirds(db, function() {
-    res.json(birds); 
+    res.status(200).json(birds); 
     db.close();
     });
   });
@@ -173,16 +174,15 @@ app.get('/', function (req, res) {
 // accept POST request on the homepage
 app.post('/', function (req, res) {
   //res.send('Got a POST request');
-  console.log(req.body.msg.coords);
+  //console.log(req.body.msg.coord);
   res.send('Test Response')
 
   MongoClient.connect(url, function(err, db) {
   var reporter = req.body.msg.reporter;
   var bird_species = req.body.msg.bird_species;
   var datetime = req.body.msg.datetime;
-  var lat = req.body.msg.lat;
-  var lon = req.body.msg.lng;
-  var image = req.body.msg.image;
+  var coord = req.body.msg.coord;
+   var image = req.body.msg.image;
   var sound = req.body.msg.sound;
   var notes = req.body.msg.notes;
 
@@ -194,7 +194,7 @@ app.post('/', function (req, res) {
       'image': image,
       'sound': sound,
       'notes': notes,
-      'coord': [ lat, lon ]
+      'coord': coord
     });
    db.close;
   });
